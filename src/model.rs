@@ -1,12 +1,43 @@
 use serde::Deserialize;
 
 pub trait TableView<const N: usize> {
-    fn columns(&self) -> [&'static str; N];
-    fn to_row(self) -> Vec<String>;
+    fn to_row(self) -> [String; N];
 }
 
 pub const NUM_COLUMNS: usize = 9;
-const COLUMNS: [&str; NUM_COLUMNS] = [
+
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Column {
+    Site = 0,
+    IP = 1,
+    Device = 2,
+    Resolution = 3,
+    Browser = 4,
+    Time = 5,
+    Country = 6,
+    State = 7,
+    City = 8,
+}
+
+impl From<usize> for Column {
+    fn from(value: usize) -> Self {
+        use Column::*;
+        match value {
+            0 => Site,
+            1 => IP,
+            2 => Device,
+            3 => Resolution,
+            4 => Browser,
+            5 => Time,
+            6 => Country,
+            7 => State,
+            8 => City,
+            _ => panic!("INVALID COLUMN ID: {value}"),
+        }
+    }
+}
+
+pub const COLUMNS: [&str; NUM_COLUMNS] = [
     "Site",
     "IP",
     "Device",
@@ -35,11 +66,7 @@ pub struct User {
 pub type Users = Vec<User>;
 
 impl TableView<NUM_COLUMNS> for User {
-    fn columns(&self) -> [&'static str; NUM_COLUMNS] {
-        COLUMNS
-    }
-
-    fn to_row(self) -> Vec<String> {
+    fn to_row(self) -> [String; NUM_COLUMNS] {
         let User {
             site,
             ip,
@@ -51,18 +78,10 @@ impl TableView<NUM_COLUMNS> for User {
             state,
             city,
         } = self;
-        vec![
+        [
             site, ip, device, resolution, browser, time, country, state, city,
         ]
     }
 }
 
-impl TableView<NUM_COLUMNS> for Users {
-    fn columns(&self) -> [&'static str; NUM_COLUMNS] {
-        COLUMNS
-    }
-
-    fn to_row(self) -> Vec<String> {
-        unimplemented!()
-    }
-}
+// DateTime FMT: April 24, 2024 at 4:42:55 PM
