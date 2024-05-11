@@ -10,3 +10,6 @@
 .env
 src/evil_env.rs
 .gitignore
+**/.DS_Store
+**/bundle/*
+build

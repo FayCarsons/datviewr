@@ -3,6 +3,20 @@
 version = 3
 
 [[package]]
+name = "KiggyMetric"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "dioxus",
+ "dioxus-logger",
+ "dotenv",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tracing",
+]
+
+[[package]]
 name = "addr2line"
 version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -763,20 +777,6 @@ dependencies = [
  "lock_api",
  "once_cell",
  "parking_lot_core",
-]
-
-[[package]]
-name = "datgui"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "dioxus",
- "dioxus-logger",
- "dotenv",
- "reqwest",
- "serde",
- "serde_json",
- "tracing",
 ]
 
 [[package]]

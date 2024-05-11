@@ -1,6 +1,4 @@
 #![allow(non_snake_case)]
-#![feature(iter_intersperse)]
-#![feature(iter_partition_in_place)]
 mod client;
 mod evil_env;
 mod model;
